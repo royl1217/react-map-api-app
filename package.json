@@ -6,14 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "start": "node server.js"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@arcgis/core": "^4.34.8",
-    "express": "^4.22.1",
-    "maplibre-gl": "^5.17.0",
-    "node-fetch": "^3.3.2",
-    "ol": "^10.7.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
