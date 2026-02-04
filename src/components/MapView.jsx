@@ -16,8 +16,10 @@ export default function HK80MapView() {
   useEffect(() => {
     // IMPORTANT: HK80 vector tiles do NOT exist.
     // ArcGIS requires EPSG:3857 tiles, then reprojects them into HK80.
+    // const basemapVTURL =
+    //   "https://mapapi.geodata.gov.hk/gs/api/v1.0.0/vt/basemap/EPSG3857";
     const basemapVTURL =
-      "https://mapapi.geodata.gov.hk/gs/api/v1.0.0/vt/basemap/EPSG3857";
+      "https://hk-map.ontat1111217.workers.dev/hkmap/gs/api/v1.0.0/vt/basemap/EPSG3857";
 
     const basemap = new Basemap({
       baseLayers: [
