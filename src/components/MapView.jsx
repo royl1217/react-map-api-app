@@ -5,22 +5,28 @@ import VectorTileLayer from "ol/layer/VectorTile";
 import VectorTileSource from "ol/source/VectorTile";
 import MVT from "ol/format/MVT";
 import { fromLonLat } from "ol/proj";
+import { createXYZ } from "ol/tilegrid";
 import "ol/ol.css";
 
 export default function MapView() {
   const mapRef = useRef(null);
 
   useEffect(() => {
+    const tileGrid = createXYZ({
+      maxZoom: 19,
+      tileSize: 256,
+    });
+
     const map = new Map({
       target: mapRef.current,
       layers: [
         new VectorTileLayer({
           source: new VectorTileSource({
             format: new MVT(),
+            tileGrid,
             url: `${window.location.origin}/hkmap/gs/api/v1.0.0/vt/basemap/EPSG3857/tile/{z}/{y}/{x}.pbf`,
             maxZoom: 19,
           }),
-          style: null, // use default styling for now
         }),
       ],
       view: new View({
@@ -32,10 +38,5 @@ export default function MapView() {
     return () => map.setTarget(null);
   }, []);
 
-  return (
-    <div
-      ref={mapRef}
-      style={{ width: "100%", height: "100vh", position: "relative" }}
-    />
-  );
+  return <div ref={mapRef} style={{ width: "100%", height: "100vh" }} />;
 }
