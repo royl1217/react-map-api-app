@@ -14,17 +14,16 @@ export default function HK80MapView() {
   const mapRef = useRef(null);
 
   useEffect(() => {
-    // Your Fly.io style.json
-    const styleJSON = "https://hk-map-proxy.fly.dev/style.json"; // deployment using fly io proxy
+    const styleJSON = "https://hk-map-proxy.fly.dev/style.json";
+
+    const vtLayer = new VectorTileLayer({
+      url: styleJSON,
+      copyright:
+        '<a href="https://api.portal.hkmapservice.gov.hk/disclaimer" target="_blank" class="copyright-url">&copy; Map information from Lands Department</a><div class="copyright-logo"></div>',
+    });
 
     const basemap = new Basemap({
-      baseLayers: [
-        new VectorTileLayer({
-          url: styleJSON,
-          copyright:
-            '<a href="https://api.portal.hkmapservice.gov.hk/disclaimer" target="_blank" class="copyright-url">&copy; Map information from Lands Department</a><div class="copyright-logo"></div>',
-        }),
-      ],
+      baseLayers: [vtLayer],
     });
 
     const map = new Map({
@@ -38,7 +37,7 @@ export default function HK80MapView() {
       center: new Point({
         x: 833359.88495,
         y: 822961.986247,
-        spatialReference: new SpatialReference({ wkid: 2326 }), // HK80
+        spatialReference: new SpatialReference({ wkid: 2326 }),
       }),
       spatialReference: new SpatialReference({ wkid: 2326 }),
       constraints: {
