@@ -14,17 +14,13 @@ export default function HK80MapView() {
   const mapRef = useRef(null);
 
   useEffect(() => {
-    // IMPORTANT: HK80 vector tiles do NOT exist.
-    // ArcGIS requires EPSG:3857 tiles, then reprojects them into HK80.
-    // const basemapVTURL =
-    //   "https://mapapi.geodata.gov.hk/gs/api/v1.0.0/vt/basemap/EPSG3857";
-    const basemapVTURL =
-      "https://hk-map.ontat1111217.workers.dev/hkmap/gs/api/v1.0.0/vt/basemap/EPSG3857";
+    // Your Fly.io style.json
+    const styleJSON = "https://hk-map-proxy.fly.dev/style.json"; // deployment using fly io proxy
 
     const basemap = new Basemap({
       baseLayers: [
         new VectorTileLayer({
-          url: basemapVTURL,
+          url: styleJSON,
           copyright:
             '<a href="https://api.portal.hkmapservice.gov.hk/disclaimer" target="_blank" class="copyright-url">&copy; Map information from Lands Department</a><div class="copyright-logo"></div>',
         }),

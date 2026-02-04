@@ -1,0 +1,2 @@
+https://hk-map-proxy.fly.dev/hkmap/gs/api/v1.0.0/vt/basemap/HK80/tile/15/6161/4600.pbf
+https://hk-map-proxy.fly.dev/style.json
