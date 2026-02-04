@@ -1,5 +1,5 @@
-import MapView from "./components/MapView";
+import HK80MapView from "./components/MapView";
 
 export default function App() {
-  return <MapView />;
+  return <HK80MapView />;
 }

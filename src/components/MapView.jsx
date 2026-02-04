@@ -1,42 +1,62 @@
 import { useEffect, useRef } from "react";
-import Map from "ol/Map";
-import View from "ol/View";
-import VectorTileLayer from "ol/layer/VectorTile";
-import VectorTileSource from "ol/source/VectorTile";
-import MVT from "ol/format/MVT";
-import { fromLonLat } from "ol/proj";
-import { createXYZ } from "ol/tilegrid";
-import "ol/ol.css";
 
-export default function MapView() {
+import Map from "@arcgis/core/Map";
+import MapView from "@arcgis/core/views/MapView";
+import Basemap from "@arcgis/core/Basemap";
+import VectorTileLayer from "@arcgis/core/layers/VectorTileLayer";
+import SpatialReference from "@arcgis/core/geometry/SpatialReference";
+import Point from "@arcgis/core/geometry/Point";
+
+import "@arcgis/core/assets/esri/themes/light/main.css";
+import "../styles/map.css";
+
+export default function HK80MapView() {
   const mapRef = useRef(null);
 
   useEffect(() => {
-    const tileGrid = createXYZ({
-      maxZoom: 19,
-      tileSize: 256,
+    // IMPORTANT: HK80 vector tiles do NOT exist.
+    // ArcGIS requires EPSG:3857 tiles, then reprojects them into HK80.
+    const basemapVTURL =
+      "https://mapapi.geodata.gov.hk/gs/api/v1.0.0/vt/basemap/EPSG3857";
+
+    const basemap = new Basemap({
+      baseLayers: [
+        new VectorTileLayer({
+          url: basemapVTURL,
+          copyright:
+            '<a href="https://api.portal.hkmapservice.gov.hk/disclaimer" target="_blank" class="copyright-url">&copy; Map information from Lands Department</a><div class="copyright-logo"></div>',
+        }),
+      ],
     });
 
     const map = new Map({
-      target: mapRef.current,
-      layers: [
-        new VectorTileLayer({
-          source: new VectorTileSource({
-            format: new MVT(),
-            tileGrid,
-            url: `${window.location.origin}/hkmap/gs/api/v1.0.0/vt/basemap/EPSG3857/tile/{z}/{y}/{x}.pbf`,
-            maxZoom: 19,
-          }),
-        }),
-      ],
-      view: new View({
-        center: fromLonLat([114.1694, 22.3193]),
-        zoom: 12,
-      }),
+      basemap,
     });
 
-    return () => map.setTarget(null);
+    const view = new MapView({
+      container: mapRef.current,
+      map,
+      zoom: 10,
+      center: new Point({
+        x: 833359.88495,
+        y: 822961.986247,
+        spatialReference: new SpatialReference({ wkid: 2326 }), // HK80
+      }),
+      spatialReference: new SpatialReference({ wkid: 2326 }),
+      constraints: {
+        minZoom: 8,
+        maxZoom: 19,
+      },
+    });
+
+    return () => view.destroy();
   }, []);
 
-  return <div ref={mapRef} style={{ width: "100%", height: "100vh" }} />;
+  return (
+    <div
+      id="map-area"
+      ref={mapRef}
+      style={{ width: "100%", height: "100vh" }}
+    />
+  );
 }

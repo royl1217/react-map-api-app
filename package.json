@@ -9,6 +9,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@arcgis/core": "^4.34.8",
     "express": "^4.22.1",
     "maplibre-gl": "^5.17.0",
     "node-fetch": "^3.3.2",
