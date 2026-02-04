@@ -14,16 +14,17 @@ export default function HK80MapView() {
   const mapRef = useRef(null);
 
   useEffect(() => {
-    const styleJSON = "https://hk-map-proxy.fly.dev/style.json";
-
-    const vtLayer = new VectorTileLayer({
-      url: styleJSON,
-      copyright:
-        '<a href="https://api.portal.hkmapservice.gov.hk/disclaimer" target="_blank" class="copyright-url">&copy; Map information from Lands Department</a><div class="copyright-logo"></div>',
-    });
+    const basemapVTURL =
+      "https://hk-map-proxy.fly.dev/hkmap/gs/api/v1.0.0/vt/basemap/HK80";
 
     const basemap = new Basemap({
-      baseLayers: [vtLayer],
+      baseLayers: [
+        new VectorTileLayer({
+          url: basemapVTURL,
+          copyright:
+            '<a href="https://api.portal.hkmapservice.gov.hk/disclaimer" target="_blank" class="copyright-url">&copy; Map information from Lands Department</a><div class="copyright-logo"></div>',
+        }),
+      ],
     });
 
     const map = new Map({

@@ -1,2 +1,5 @@
 https://hk-map-proxy.fly.dev/hkmap/gs/api/v1.0.0/vt/basemap/HK80/tile/15/6161/4600.pbf
-https://hk-map-proxy.fly.dev/style.json
+https://hk-map-proxy.fly.dev/hkmap/gs/api/v1.0.0/vt/basemap/HK80/resources/styles/root.json
+https://hk-map-proxy.fly.dev/hkmap/gs/api/v1.0.0/vt/basemap/HK80/resources/sprites/sprite.json
+https://hk-map-proxy.fly.dev/hkmap/gs/api/v1.0.0/vt/basemap/HK80/resources/fonts/Arial%20Regular/0-255.pbf
+https://hk-map-proxy.fly.dev/hkmap/gs/api/v1.0.0/vt/basemap/HK80?f=pjson
