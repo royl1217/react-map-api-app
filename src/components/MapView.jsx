@@ -14,7 +14,7 @@ export default function MapView() {
           basemap: {
             type: "vector",
             tiles: [
-              "/hkmap/gs/api/v1.0.0/vt/basemap/EPSG3857/tile/{z}/{y}/{x}.pbf",
+              `${window.location.origin}/hkmap/gs/api/v1.0.0/vt/basemap/EPSG3857/tile/{z}/{y}/{x}.pbf`,
             ],
             minzoom: 0,
             maxzoom: 19,
