@@ -4,13 +4,9 @@ import "../styles/map.css";
 
 export default function MapView() {
   useEffect(() => {
-    const isLocalhost =
-      window.location.hostname === "localhost" ||
-      window.location.hostname === "127.0.0.1";
-
     const map = new maplibregl.Map({
       container: "map",
-      center: [114.1694, 22.3193], // Central
+      center: [114.1694, 22.3193],
       zoom: 12,
       style: {
         version: 8,
@@ -18,7 +14,7 @@ export default function MapView() {
           basemap: {
             type: "vector",
             tiles: [
-              "https://mapapi.geodata.gov.hk/gs/api/v1.0.0/vt/basemap/EPSG3857/tile/{z}/{y}/{x}.pbf",
+              "/hkmap/gs/api/v1.0.0/vt/basemap/EPSG3857/tile/{z}/{y}/{x}.pbf",
             ],
             minzoom: 0,
             maxzoom: 19,
@@ -26,7 +22,7 @@ export default function MapView() {
         },
         layers: [
           {
-            id: "roads-debug",
+            id: "roads",
             type: "line",
             source: "basemap",
             "source-layer": "RoadL",
@@ -36,17 +32,6 @@ export default function MapView() {
             },
           },
         ],
-      },
-      transformRequest: (url) => {
-        if (isLocalhost && url.startsWith("https://mapapi.geodata.gov.hk")) {
-          return {
-            url: url.replace(
-              "https://mapapi.geodata.gov.hk",
-              "http://localhost:5173/hkmap",
-            ),
-          };
-        }
-        return { url };
       },
     });
 
