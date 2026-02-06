@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@arcgis/core": "^4.34.8",
+    "bootstrap": "^5.3.8",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.13.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.0",
